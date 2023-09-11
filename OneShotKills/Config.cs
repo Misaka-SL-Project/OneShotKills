@@ -11,6 +11,6 @@ public sealed class Config : IConfig
     public bool DoctorOneShots { get; set; } = true;
     [Description("Whether or not larry should instant kill (deals 50k damage)")]
     public bool LarryOneShots { get; set; } = false;
-    //[Description("Return larry to how he used to be - Not implemented yet")]
-    //public bool LarryInstaDimension { get; set; } = false;
+    [Description("Return larry to how he used to be: 1 hit = sent to pocket dimension")]
+     public bool EnableOldLarry { get; set; } = true;
 }
