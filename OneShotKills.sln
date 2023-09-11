@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneShotKills", "OneShotKills\OneShotKills.csproj", "{FAFD35CB-59E7-4AE5-A0E0-87FC3C2DCF5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAFD35CB-59E7-4AE5-A0E0-87FC3C2DCF5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAFD35CB-59E7-4AE5-A0E0-87FC3C2DCF5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAFD35CB-59E7-4AE5-A0E0-87FC3C2DCF5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAFD35CB-59E7-4AE5-A0E0-87FC3C2DCF5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F36E038-1D05-4249-AC13-7849EB244BF5}
+	EndGlobalSection
+EndGlobal
