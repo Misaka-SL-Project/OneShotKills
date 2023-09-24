@@ -1,34 +1,42 @@
 ﻿namespace OneShotKills;
 
-using Exiled.API.Enums;
 using Exiled.API.Features;
-
+using HarmonyLib;
 
 public class Plugin : Plugin<Config>
 {
-    public override string Name => "OneShotKills";
-    public override string Prefix => Name;
-    public override string Author => "@misfiy";
+     public override string Name => "OneShotKills";
+     public override string Prefix => Name;
+     public override string Author => "@misfiy";
+     public override Version Version => new(1, 0, 1);
+     public override Version RequiredExiledVersion => new(8, 2, 1);
 
-    public static Plugin Instance;
-    
-    private EventHandler handler;
+     public static Plugin Instance;
 
-    public override void OnEnabled()
-    {
-        Instance = this;
-        handler = new();
+     private EventHandler handler;
+     private Harmony? harmony;
 
-        Exiled.Events.Handlers.Player.Hurting += handler.OnHurt;
+     public override void OnEnabled()
+     {
+          Instance = this;
+          handler = new();
 
-        base.OnEnabled();
-    }
-    public override void OnDisabled()
-    {
-        Exiled.Events.Handlers.Player.Hurting -= handler.OnHurt;
+          harmony = new("OneShotKills");
+          harmony.PatchAll();
 
-        handler = null!;
-        Instance = null!;
-        base.OnDisabled();
-    }
+          Exiled.Events.Handlers.Player.Hurting += handler.OnHurt;
+
+          base.OnEnabled();
+     }
+     public override void OnDisabled()
+     {
+          Exiled.Events.Handlers.Player.Hurting -= handler.OnHurt;
+
+          harmony?.UnpatchAll("OneShotKills");
+          harmony = null;
+
+          handler = null!;
+          Instance = null!;
+          base.OnDisabled();
+     }
 }
