@@ -13,29 +13,29 @@ public class Plugin : Plugin<Config>
 
      public static Plugin Instance;
 
-     private EventHandler handler;
+     //private EventHandler handler;
      private Harmony? harmony;
 
      public override void OnEnabled()
      {
           Instance = this;
-          handler = new();
+          //handler = new();
 
           harmony = new("OneShotKills");
           harmony.PatchAll();
 
-          Exiled.Events.Handlers.Player.Hurting += handler.OnHurt;
+          //Exiled.Events.Handlers.Player.Hurting += handler.OnHurt;
 
           base.OnEnabled();
      }
      public override void OnDisabled()
      {
-          Exiled.Events.Handlers.Player.Hurting -= handler.OnHurt;
+          //Exiled.Events.Handlers.Player.Hurting -= handler.OnHurt;
 
           harmony?.UnpatchAll("OneShotKills");
           harmony = null;
 
-          handler = null!;
+          //handler = null!;
           Instance = null!;
           base.OnDisabled();
      }
