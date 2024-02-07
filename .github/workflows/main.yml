@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Build Results
-        path: OneShotKills/bin/Release/OneShotKills.dll
+        path: OneShotKills/bin/Release/net48/OneShotKills.dll
