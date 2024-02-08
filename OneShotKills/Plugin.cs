@@ -8,8 +8,8 @@ public class Plugin : Plugin<Config>
      public override string Name => "OneShotKills";
      public override string Prefix => Name;
      public override string Author => "@misfiy";
-     public override Version Version => new(1, 0, 2);
-     public override Version RequiredExiledVersion => new(8, 2, 1);
+     public override Version Version => new(1, 0, 3);
+     public override Version RequiredExiledVersion => new(8, 7, 2);
 
      public static Plugin Instance;
 

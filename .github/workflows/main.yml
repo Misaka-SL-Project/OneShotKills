@@ -1,0 +1,41 @@
+name: OneShotKills CI
+on: [push, pull_request]
+
+env:
+  EXILED_REFERENCES_URL: https://misaka-zerotwo.github.io/SL-References/Dev.zip
+  EXILED_REFERENCES_PATH: ${{ github.workspace }}/References
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1.5.0
+
+    - uses: actions/checkout@v2.3.4
+
+    - name: Get references
+      shell: pwsh
+      run: |
+        Invoke-WebRequest -Uri ${{ env.EXILED_REFERENCES_URL }} -OutFile ${{ github.workspace }}/References.zip
+        Expand-Archive -Path References.zip -DestinationPath ${{ env.EXILED_REFERENCES_PATH }}
+
+    - name: Restore project
+      run: dotnet restore -p:Configuration=Release
+
+    - name: Build project
+      shell: pwsh
+      run: |
+        if ('${{ GITHUB.REF }}' -Match 'dev$') {
+           dotnet build -p:DeployToServer=false -p:Configuration=Release -p:BuildNumber=${{ GITHUB.RUN_NUMBER }}
+        } else {
+           dotnet build -p:DeployToServer=false -p:Configuration=Release
+        }
+      env:
+        EXILED_REFERENCES: ${{ github.workspace }}/References
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Build Results
+        path: OneShotKills/bin/Release/net48/OneShotKills.dll
