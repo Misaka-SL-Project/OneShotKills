@@ -28,10 +28,20 @@ namespace OneShotKills.Patches
             index += 5;
 
             Collection<CodeInstruction> collection = new()
-               {
+            {
                     new(OpCodes.Call, Method(typeof(InstaKill), nameof(InstaKill.ShouldInstakill), new [] { typeof(bool) }))
-               };
+            };
+
             newInstructions.InsertRange(index, collection);
+
+            index = newInstructions.FindLastIndex(instruction => instruction.opcode == OpCodes.Callvirt && (MethodInfo)instruction.operand == PropertyGetter(typeof(StatusEffectBase), nameof(StatusEffectBase.IsEnabled)));
+            newInstructions.RemoveRange(--index, 2);
+
+            newInstructions.InsertRange(index, new CodeInstruction[]
+            {
+                new(OpCodes.Ldarg_0),
+                new(OpCodes.Ldfld, Field(typeof(Scp049AttackAbility), nameof(Scp049AttackAbility._isInstaKillAttack))),
+            });
 
             foreach (CodeInstruction instruction in newInstructions)
                 yield return instruction;
