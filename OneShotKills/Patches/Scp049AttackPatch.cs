@@ -25,7 +25,7 @@ namespace OneShotKills.Patches
 
             int index = newInstructions.FindLastIndex(instruction =>
             instruction.opcode == OpCodes.Callvirt && (MethodInfo)instruction.operand == Method(typeof(PlayerEffectsController), nameof(PlayerEffectsController.GetEffect), null, new[] { typeof(CardiacArrest) }));
-            index += 4;
+            index += 1;
 
             Collection<CodeInstruction> collection = new()
                {
